@@ -7,11 +7,13 @@ const cookieParser=require("cookie-parser")
 const authRoute=require("../server/Routes/Auth.route")
 
 app.use(express.json());
-app.use(cors({
-    origin: ['http://localhost:3000'],
-    methods: 'GET,POST,PATCH,DELETE',
-    credentials: true,
-}));
+const corsOptions = {
+    origin: 'http://localhost:5173', // Replace with the actual origin of your frontend application
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true, // Enable credentials (cookies, HTTP authentication) in CORS requests
+};
+
+app.use(cors(corsOptions));
 
 require('../server/config/mongoose.connect');
 app.use(cookieParser());
